@@ -3,6 +3,7 @@ package com.company;
 import examples.MathHelper;
 import models.Promotion;
 import models.User;
+import services.UserService;
 
 import java.util.Date;
 
@@ -35,5 +36,16 @@ public class Main {
 
         MathHelper mathHelper = new MathHelper();
         boolean result = mathHelper.isPrimeNumber(5);
+
+        User user = new User("pawel.kubiak@gmail.com", "Paweł", "Kubiak", false, true, true, true, "48505869606", "testaddress");
+        User user1 = new User("emil.d@gmail.com", "Emil", "D", true, false, false, false, "48500500500", "testaddress");
+        User[] allUsers = new User[2];
+        allUsers[0] = user;
+        allUsers[1] = user1;
+        UserService userService = new UserService();
+
+        for (User u:allUsers) {
+            userService.sendMessage(u);
+        }
     }
 }
