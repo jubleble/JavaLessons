@@ -3,9 +3,6 @@ package com.company;
 import models.User;
 import examples.MathHelper;
 import services.UserService;
-import utils.ArrayHelperGeneric;
-
-import java.util.Date;
 
 public class Main {
 
@@ -44,8 +41,12 @@ public class Main {
         allUsers[1] = user1;
         UserService userService = new UserService();
 
+        /*
         for (User u:allUsers) {
             userService.sendMessage(u);
         }
+        */
+        User[] onlyEmailUsers = userService.getUsersWhoSubscribeEmailChannel(allUsers);
+        System.out.println(onlyEmailUsers.length);
     }
 }

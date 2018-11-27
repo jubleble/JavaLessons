@@ -2,19 +2,12 @@ package services;
 
 import models.User;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import utils.ArrayHelperGeneric;
 
 /**
  * Created by pawelk on 27/11/2018.
  */
 public class UserService {
-    /*
-    W sytuacji, gdy nie ma sprecyzowanego wyboru kanału komunikacji dla promocji, należy uwzględnić następujące priorytety dla preferencji:
-
-1 - mail
-2 - sms
-3 - telefon
-4 - poczta
-     */
     public void sendMessage(User user) {
         if (user.isByEmail()) {
             System.out.println(user.toString() + " received message by Email!");
@@ -35,7 +28,14 @@ public class UserService {
     }
 
     public User[] getUsersWhoSubscribeEmailChannel(User[] allUsers) {
-        throw new NotImplementedException();
+        ArrayHelperGeneric<User> arrayHelperGeneric = new ArrayHelperGeneric<>();
+        User[] resultUsers = new User[0];
+        for (User user:allUsers) {
+            if (user.isByEmail()) {
+                resultUsers = arrayHelperGeneric.addItem(resultUsers, user);
+            }
+        }
+        return resultUsers;
     }
 
     public User[] getUsersWhoHaveMoreLoyaltyPointsThan(User[] allUsers, int minimumExpectedLoyaltyPoints) {

@@ -22,6 +22,7 @@ public class ArrayHelperGeneric<T> {
         T[] newArray = Arrays.copyOf(oldArray, oldArray.length + 1);
 
         for (int i = 0; i < oldArray.length; i++) {
+            // huge fuck up!!!
             newArray[i] = oldArray[i];
         }
 
