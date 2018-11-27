@@ -1,8 +1,7 @@
 package com.company;
 
-import examples.MathHelper;
-import models.Promotion;
 import models.User;
+import utils.ArrayHelperGeneric;
 
 import java.util.Date;
 
@@ -31,9 +30,13 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         LoopTest loopTest = new LoopTest(scanner);
         loopTest.test();
-        */
 
         MathHelper mathHelper = new MathHelper();
         boolean result = mathHelper.isPrimeNumber(5);
+        */
+
+        ArrayHelperGeneric<String> stringArrayHelperGeneric = new ArrayHelperGeneric<String>();
+        ArrayHelperGeneric<Integer> integerArrayHelperGeneric = new ArrayHelperGeneric<Integer>();
+        ArrayHelperGeneric<User> userArrayHelperGeneric = new ArrayHelperGeneric<User>();
     }
 }
