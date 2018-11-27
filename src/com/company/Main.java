@@ -1,9 +1,9 @@
 package com.company;
 
-import examples.MathHelper;
-import models.Promotion;
 import models.User;
+import examples.MathHelper;
 import services.UserService;
+import utils.ArrayHelperGeneric;
 
 import java.util.Date;
 
