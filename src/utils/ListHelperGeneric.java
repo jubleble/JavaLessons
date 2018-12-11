@@ -20,14 +20,14 @@ public class ListHelperGeneric<T>{
         if(arrayList.isEmpty())
             return null;
 
-        T temp = arrayList.get(0);
+        T min = arrayList.get(0);
         Iterator<T> iterator = arrayList.iterator();
         while(iterator.hasNext()){
             T next = iterator.next();
-            if(next.compareTo(temp) < 0)
-                temp = next;
+            if(next.compareTo(min) < 0)
+                min = next;
         }
-        return temp;
+        return min;
     }
 
     public <T extends Comparable<T>> T getMaxValue(ArrayList<T> arrayList){
@@ -35,14 +35,14 @@ public class ListHelperGeneric<T>{
         if(arrayList.isEmpty())
             return null;
 
-        T temp = arrayList.get(0);
+        T max = arrayList.get(0);
         Iterator<T> iterator = arrayList.iterator();
         while(iterator.hasNext()){
             T next = iterator.next();
-            if(next.compareTo(temp) > 0)
-                temp = next;
+            if(next.compareTo(max) > 0)
+                max = next;
         }
-        return temp;
+        return max;
     }
 
     public boolean findItem(ArrayList<T> arrayList, T item){
