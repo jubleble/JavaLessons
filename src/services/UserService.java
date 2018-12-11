@@ -1,5 +1,6 @@
 package services;
 
+import exceptions.UserCannotReceiveMessageException;
 import models.User;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import utils.ArrayHelperGeneric;
@@ -8,7 +9,7 @@ import utils.ArrayHelperGeneric;
  * Created by pawelk on 27/11/2018.
  */
 public class UserService {
-    public void sendMessage(User user) {
+    public void sendMessage(User user) throws UserCannotReceiveMessageException {
         if (user.isByEmail()) {
             System.out.println(user.toString() + " received message by Email!");
         } else if (user.isByText()) {
@@ -18,12 +19,8 @@ public class UserService {
         } else if (user.isByPost()) {
             System.out.println(user.toString() + " received message by Post!");
         } else {
-            /*
-                todo
-                1. implement custom exception class - UserCannotReceiveMessageException
-                2. throw that exception
-             */
-            System.out.println(user.toString() + " didn't received message!");
+            UserCannotReceiveMessageException exception = new UserCannotReceiveMessageException();
+            throw exception;
         }
     }
 
@@ -38,7 +35,69 @@ public class UserService {
         return resultUsers;
     }
 
-    public User[] getUsersWhoHaveMoreLoyaltyPointsThan(User[] allUsers, int minimumExpectedLoyaltyPoints) {
+    public User[] getUsersWhoHaveMoreLoyaltyPointsThan
+            (User[] allUsers, int minimumExpectedLoyaltyPoints) {
+        NotImplementedException exception = new NotImplementedException();
+        throw exception;
+    }
+
+  /*
+    write unit tests
+    method should try find user by firstName and lastName
+    create class UserNotFoundException
+    WHEN provided user doesn't exist in array 'users' THEN throw exception UserNotFoundException
+
+    public User getUser(User[] users, String firstName, String lastName) throws UserNotFoundException{
+        NotImplementedException exception = new NotImplementedException();
+        throw exception;
+    }
+
+    write unit tests
+    method should calculate number of loyalty points of users
+    [u1,u2,u3]
+        u1.loyaltyPoints = 30;
+        u2.loyaltyPoints = 20;
+        u3.loyaltyPoints = 50;
+    => 30 + 20 + 50 = 100;
+
+    public int calculateLoyaltyPointsOfUsers(User[] users) {
         throw new NotImplementedException();
     }
+
+    write unit tests
+    method should set up '0' as a new value for loyaltyPoints of provided users
+    [u1,u2,u3]
+        u1.loyaltyPoints = 30;
+        u2.loyaltyPoints = 20;
+        u3.loyaltyPoints = 50;
+    =>
+        u1.loyaltyPoints = 0;
+        u2.loyaltyPoints = 0;
+        u3.loyaltyPoints = 0;
+
+    public void clearLoyaltyPoints(User[] users) {
+        throw new NotImplementedException();
+    }
+
+
+    write unit tests
+    method should update user phone number
+    WrongPhoneNumberException - should be thrown in case WHEN:
+        - newPhoneNumber is exactly the same like old one
+        - newPhoneNumber has less characters than 8 or more than 12
+
+    public void updateUserPhoneNumber(User user, String newPhoneNumber) throws WrongPhoneNumberException {
+
+    }
+
+    write unit tests
+    method should update user address
+        WrongAddressException - should be thrown in case WHEN:
+        - newAddress is exactly the same like old one
+        - newAddress is empty = ""
+
+    public void updateUserAddress(User user, String newAddress) throws WrongAddressException {
+
+    }
+    */
 }

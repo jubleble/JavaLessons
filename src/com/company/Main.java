@@ -48,5 +48,7 @@ public class Main {
         */
         User[] onlyEmailUsers = userService.getUsersWhoSubscribeEmailChannel(allUsers);
         System.out.println(onlyEmailUsers.length);
+
+        User[] usersWhoHaveMoreThan250LoyaltyPoints = userService.getUsersWhoHaveMoreLoyaltyPointsThan(allUsers, 250);
     }
 }
