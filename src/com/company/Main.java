@@ -1,5 +1,6 @@
 package com.company;
 
+import examples.DivideByZeroException;
 import models.User;
 import examples.MathHelper;
 import services.UserService;
@@ -29,7 +30,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         LoopTest loopTest = new LoopTest(scanner);
         loopTest.test();
-        */
+
 
         MathHelper mathHelper = new MathHelper();
         boolean result = mathHelper.isPrimeNumber(5);
@@ -41,14 +42,35 @@ public class Main {
         allUsers[1] = user1;
         UserService userService = new UserService();
 
-        /*
+
         for (User u:allUsers) {
             userService.sendMessage(u);
         }
-        */
+
         User[] onlyEmailUsers = userService.getUsersWhoSubscribeEmailChannel(allUsers);
         System.out.println(onlyEmailUsers.length);
 
         User[] usersWhoHaveMoreThan250LoyaltyPoints = userService.getUsersWhoHaveMoreLoyaltyPointsThan(allUsers, 250);
+        */
+
+        MathHelper mathHelper = new MathHelper();
+        int first = 100;
+        for (int i = -2; i < 3; i++) {
+            try {
+                System.out.println(mathHelper.divide(first, i));
+            }
+            catch (DivideByZeroException exception) {
+                System.out.println("Do not divide by zero!");
+            }
+            catch (IllegalArgumentException exception) {
+                System.out.println("IllegalArgumentException occured: " + exception.toString());
+            }
+            catch (Exception exception) {
+                System.out.println("Exception occured: " + exception.toString());
+            }
+            finally {
+                System.out.println("Iteration: " + (i+3));
+            }
+        }
     }
 }
