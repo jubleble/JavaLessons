@@ -58,12 +58,12 @@ public class ArrayHelperGenericTest {
     }
 
     @Test
-    public void removeItem_WhenArrayIsEmpty_ThenShouldReturnNull() {
+    public void removeItem_WhenArrayIsEmpty_ThenShouldReturnEmptyArray() {
         // Arrange
         ArrayHelperGeneric<User> userArrayHelperGeneric = new ArrayHelperGeneric<User>();
         User[] emptyArray = new User[0];
         User removeElement = new User("test2@test2.com", "Test2", "Test2", false, false, false, false);
-        User [] expectedValue = null;
+        User [] expectedValue = emptyArray;
 
         // Act
         User[] result = userArrayHelperGeneric.removeItem(emptyArray, removeElement);
