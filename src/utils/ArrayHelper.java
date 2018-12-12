@@ -40,6 +40,21 @@ public class ArrayHelper {
         return min;
     }
 
+    public Integer getMaxValue(int[] array) {
+        int max = Integer.MIN_VALUE;
+
+        if (array.length == 0) {
+            return null;
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
+        return max;
+    }
+
     public boolean findItem(int[] array, int item) {
         for (int element:array) {
             if (element==item){
@@ -47,5 +62,57 @@ public class ArrayHelper {
             }
         }
         return false;
+    }
+
+    public Integer[] removeItem(Integer[] oldArray, Integer removeItem) {
+
+        if (oldArray.length == 0) {
+            return null;
+        }
+        int i = 0;
+        for (int element:oldArray){
+            if(element!=removeItem){
+                i++;
+            }
+        }
+        if(i==oldArray.length){
+            return oldArray;
+        }
+        Integer[] newArray = new Integer[oldArray.length - 1];
+        int j =0;
+        for (int element:oldArray) {
+            if (element!=removeItem) {
+                newArray[j] = element;
+                j++;
+            }
+        }
+        return newArray;
+    }
+
+    public Integer[] swapItem(Integer[] oldArray, Integer swapItem, Integer newItem) {
+
+        if (oldArray.length == 0) {
+            return null;
+        }
+        int i = 0;
+        for (int element:oldArray){
+            if(element!=swapItem){
+                i++;
+            }
+        }
+        if(i==oldArray.length){
+            return oldArray;
+        }
+        Integer[] newArray = new Integer[oldArray.length];
+
+        for (int j = 0; j <oldArray.length ; j++) {
+            if (oldArray[j]==swapItem) {
+                newArray[j] = newItem;
+            }
+            else {
+                newArray[j] = oldArray[j];
+            }
+        }
+        return newArray;
     }
 }
