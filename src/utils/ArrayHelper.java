@@ -1,7 +1,5 @@
 package utils;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * Created by pawelk on 06/11/2018.
  *  IMPLEMENTED get min value from array (public T getMinValue(T[] array))

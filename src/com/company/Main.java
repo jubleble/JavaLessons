@@ -53,6 +53,7 @@ public class Main {
         User[] usersWhoHaveMoreThan250LoyaltyPoints = userService.getUsersWhoHaveMoreLoyaltyPointsThan(allUsers, 250);
         */
 
+        /* Lesson - exceptions
         MathHelper mathHelper = new MathHelper();
         int first = 100;
         for (int i = -2; i < 3; i++) {
@@ -72,5 +73,24 @@ public class Main {
                 System.out.println("Iteration: " + (i+3));
             }
         }
+        */
+
+        // Problem solving - cannot read property from object
+        /*
+        User user1 = new User("pawel.kubiak@gmail.com", "Paweł", "Kubiak", false, true, true, true, "48505869606", "testaddress");
+        User user2 = new User("emil.d@gmail.com", "Emil", "D", true, false, false, false, "48500500500", "testaddress");
+        User[] allUsers = new User[2];
+        allUsers[0] = user1;
+        allUsers[1] = user2;
+
+        String expectedName = "Emil";
+        for (User user:allUsers) {
+            if (user.getFirstName()==expectedName) {
+                System.out.println("Found: " + user.getFirstName());
+            } else {
+                System.out.println("Found " + user.getFirstName() + " instead of " + expectedName);
+            }
+        }
+        */
     }
 }
