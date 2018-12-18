@@ -5,11 +5,11 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Created by pawelk on 06/11/2018.
  *  IMPLEMENTED get min value from array (public T getMinValue(T[] array))
-    get max value from array (public T getMaxValue(T[] array))
+    IMPLEMENTED get max value from array (public T getMaxValue(T[] array))
     IMPLEMENTED find item from array (public bool findItem(T[] array, T item))
     IMPLEMENTED add item to array (public T[] addItem(T[] array, T item))
-    remove item from array (public T[] removeItem(T[] array, T item))
-    swap items in array. (public T[] swapItems(T[] array, T firstItem, T secondItem))
+    IMPLEMENTED remove item from array (public T[] removeItem(T[] array, T item))
+    IMPLEMENTED swap items in array. (public T[] swapItems(T[] array, T firstItem, T secondItem))
  */
 public class ArrayHelper {
     public Integer[] addItem(Integer[] oldArray, Integer newItem) {
@@ -39,7 +39,7 @@ public class ArrayHelper {
         return min;
     }
 
-    public boolean findItem(int[] array, int item) {
+    public boolean findItem(Integer[] array, int item) {
         for (int element:array) {
             if (element==item){
                 return true;
@@ -47,4 +47,57 @@ public class ArrayHelper {
         }
         return false;
     }
+
+    public Integer getMaxValue(int[] array){
+        if(array.length == 0)
+            return null;
+        int result = Integer.MIN_VALUE;
+        for (int param: array) {
+            if(param>result)
+                result = param;
+        }
+        return result;
+    }
+
+    public Integer[] removeItem(Integer[] array, Integer item){
+        if(array.length == 0)
+            return null;
+        int length = 0;
+        for (Integer param: array) {
+            if(!param.equals(item)){
+                length++;
+            }
+        }
+        Integer[] resultArray = new Integer[length];
+        int j = 0;
+        for (Integer param: array) {
+            if(!param.equals(item)){
+                resultArray[j] = param;
+                j++;
+            }
+        }
+        return resultArray;
+    }
+
+    public Integer[] swapItems(Integer[] array, int firstItem, int secondItem){
+        if(array.length == 0)
+            return null;
+        if(!findItem(array,firstItem)||!findItem(array,secondItem))
+            return array; //or NULL??
+
+        int firstItemPosition = 0;
+        int secondItemPosition = 0;
+        for (int i = 0; i < array.length; i++){
+            if(array[i].equals(firstItem))
+                firstItemPosition = i;
+            if(array[i].equals(secondItem))
+                secondItemPosition = i;
+        }
+        Integer temp;
+        temp = array[firstItemPosition];
+        array[firstItemPosition] = array[secondItemPosition];
+        array[secondItemPosition] = temp;
+        return array;
+    }
+
 }
