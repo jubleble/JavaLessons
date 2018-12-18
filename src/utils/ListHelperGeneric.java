@@ -24,8 +24,9 @@ public class ListHelperGeneric<T>{
         Iterator<T> iterator = arrayList.iterator();
         while(iterator.hasNext()){
             T next = iterator.next();
-            if(next.compareTo(min) < 0)
+            if(next.compareTo(min) < 0) {
                 min = next;
+            }
         }
         return min;
     }
