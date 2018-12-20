@@ -3,23 +3,30 @@ package services;
 import exceptions.UserCannotReceiveMessageException;
 import models.User;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-import utils.ArrayHelperGeneric;
+import utils.*;
 
 /**
  * Created by pawelk on 27/11/2018.
  */
 public class UserService {
+    private Logger logger;
+
+    public UserService(Logger logger) {
+        this.logger = logger;
+    }
+
     public void sendMessage(User user) throws UserCannotReceiveMessageException {
         if (user.isByEmail()) {
-            System.out.println(user.toString() + " received message by Email!");
+            logger.info(user.toString() + " received message by Email!");
         } else if (user.isByText()) {
-            System.out.println(user.toString() + " received message by Text!");
+            logger.info(user.toString() + " received message by Text!");
         } else if (user.isByPhone()) {
-            System.out.println(user.toString() + " received message by Phone!");
+            logger.info(user.toString() + " received message by Phone!");
         } else if (user.isByPost()) {
-            System.out.println(user.toString() + " received message by Post!");
+            logger.info(user.toString() + " received message by Post!");
         } else {
             UserCannotReceiveMessageException exception = new UserCannotReceiveMessageException();
+            logger.error("User doesn't have any allowed marketing preference!");
             throw exception;
         }
     }

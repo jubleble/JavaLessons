@@ -4,6 +4,10 @@ import examples.DivideByZeroException;
 import models.User;
 import examples.MathHelper;
 import services.UserService;
+import utils.AWSLogger;
+import utils.ConsoleLogger;
+import utils.FileLogger;
+import utils.Logger;
 
 public class Main {
 
@@ -92,5 +96,15 @@ public class Main {
             }
         }
         */
+
+        // Polimorphism
+        Logger logger = new ConsoleLogger();
+        User user1 = new User("pawel.kubiak@gmail.com", "Paweł", "Kubiak", false, true, true, true, "48505869606", "testaddress");
+        UserService userService = new UserService(logger);
+        try {
+            userService.sendMessage(user1);
+        } catch (Exception ex) {
+            logger.error(ex.toString());
+        }
     }
 }

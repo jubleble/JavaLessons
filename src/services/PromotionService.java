@@ -1,13 +1,17 @@
 package services;
 
+import utils.Logger;
+
 /**
  * Created by pawelk on 18/12/2018.
  */
 public class PromotionService {
     private UserService userService;
+    private Logger logger;
 
-    public PromotionService(UserService userService) {
-
+    public PromotionService(UserService userService, Logger logger) {
+        this.userService = userService;
+        this.logger = logger;
     }
 
     //     write unit tests
