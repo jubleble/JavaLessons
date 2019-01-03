@@ -1,6 +1,7 @@
 package services;
 
 import exceptions.UserCannotReceiveMessageException;
+import exceptions.UserNotFoundException;
 import models.User;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import utils.*;
@@ -53,8 +54,33 @@ public class UserService {
     method should try find user by firstName and lastName
     create class UserNotFoundException
     WHEN provided user doesn't exist in array 'users' THEN throw exception UserNotFoundException
+    */
+  public UserService(){}
+    public User[] findUser(User[] users, String firstName, String lastName) throws UserNotFoundException {
+        int i = 0;
+        if (users.length== 0) {
+            return users;
+        }
+        for (User u:users) {
+            if (u.getFirstName().equals(firstName) && u.getLastName().equals(lastName)) {
+                i++;
+            }
+        }
+        if (i==0){
+            throw new UserNotFoundException("Not found User:"+firstName+" "+lastName);
+        }
+        User [] findUser = new User[i+1];
+        int j = 0;
+        for (User u:users) {
+            if (u.getFirstName().equals(firstName) && u.getLastName().equals(lastName)) {
+                u = findUser[j];
+                j++;
+            }
+        }
+        return findUser;
+    }
 
-    public User getUser(User[] users, String firstName, String lastName) throws UserNotFoundException{
+    /*public User getUser(User[] users, String firstName, String lastName) throws UserNotFoundException{
         NotImplementedException exception = new NotImplementedException();
         throw exception;
     }
