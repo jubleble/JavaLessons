@@ -69,11 +69,11 @@ public class UserService {
         if (i==0){
             throw new UserNotFoundException("Not found User:"+firstName+" "+lastName);
         }
-        User [] findUser = new User[i+1];
+        User [] findUser = new User[i];
         int j = 0;
         for (User u:users) {
             if (u.getFirstName().equals(firstName) && u.getLastName().equals(lastName)) {
-                u = findUser[j];
+                findUser[j] = u;
                 j++;
             }
         }

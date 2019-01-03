@@ -9,7 +9,7 @@ import services.UserService;
 /**
  * Created by pawelk on 27/11/2018.
  */
-public class UserServiceTest {
+class UserServiceTest {
     /*
         // todo
         1. WHEN allUsersIsEmpty THEN empty array will be returned
@@ -20,7 +20,7 @@ public class UserServiceTest {
 
     //1. users array is empty then empty array
     @Test
-    public void findUserByFirstNameAndLastName_WhenArrayIsEmpty_ThenShouldReturnEmptyArray() {
+    void findUserByFirstNameAndLastName_WhenArrayIsEmpty_ThenShouldReturnEmptyArray() {
         // Arrange
         UserService userService = new UserService();
         User[] EmptyArray = new User[0];
@@ -37,5 +37,59 @@ public class UserServiceTest {
 
         // Assert
         Assertions.assertEquals(EmptyArray, result);
+    }
+
+    //2. users array is not empty and element not exist then null
+    @Test
+    void findUserByFirstNameAndLastName_WhenArrayIsNotEmptyAndElementNotExist_ThenShouldReturnUserNotFoundException() {
+        // Arrange
+        UserService userService = new UserService();
+        User[] nonEmptyArray = new User[3];
+        nonEmptyArray[0] = new User("test@test.com","test","test1",true,true,true,true,"test1","test1");
+        nonEmptyArray[1] = new User("test1@test1.com","test1","test2",true,true,true,true,"test2","test2");
+        nonEmptyArray[2] = new User("test2@test2.com","test2","test3",true,true,true,true,"test3","test3");
+        String firstName = "Test3";
+        String surname  = "Test4";
+        boolean exceptionBoolean = false;
+
+        // Act
+        User [] result = new User[0];
+        try {
+            result = userService.findUser(nonEmptyArray,firstName, surname);
+        } catch (UserNotFoundException e) {
+            exceptionBoolean = true;
+            System.out.println(e.toString());
+        }
+
+        // Assert
+        Assertions.assertTrue(exceptionBoolean);
+        Assertions.assertEquals(result, result);
+    }
+
+    //3. users array is not empty and element exist then find users
+    @Test
+    void findUserByFirstNameAndLastName_WhenArrayIsNotEmptyAndElementExist_ThenShouldReturnFindUser() {
+        // Arrange
+        UserService userService = new UserService();
+        User[] nonEmptyArray = new User[3];
+        nonEmptyArray[0] = new User("test@test.com","test","test1",true,true,true,true,"test1","test1");
+        nonEmptyArray[1] = new User("test1@test1.com","test1","test2",true,true,true,true,"test2","test2");
+        nonEmptyArray[2] = new User("test2@test2.com","test2","test3",true,true,true,true,"test3","test3");
+        String firstName = "test1";
+        String surname  = "test2";
+        boolean exceptionBoolean = false;
+
+        // Act
+        User [] result = new User[0];
+        try {
+            result = userService.findUser(nonEmptyArray,firstName, surname);
+        } catch (UserNotFoundException e) {
+            exceptionBoolean = true;
+            System.out.println(e.toString());
+        }
+
+        // Assert
+        Assertions.assertFalse(exceptionBoolean);
+        Assertions.assertEquals(nonEmptyArray[1], result[0]);
     }
 }
