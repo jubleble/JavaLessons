@@ -92,4 +92,33 @@ class UserServiceTest {
         Assertions.assertFalse(exceptionBoolean);
         Assertions.assertEquals(nonEmptyArray[1], result[0]);
     }
+
+    //4. users array is not empty and 2 element exist then find 2 users
+    @Test
+    void findUserByFirstNameAndLastName_WhenArrayIsNotEmptyAndTwoElementExist_ThenShouldReturnTwoFindUser() {
+        // Arrange
+        UserService userService = new UserService();
+        User[] nonEmptyArray = new User[4];
+        nonEmptyArray[0] = new User("test@test.com","test","test1",false,true,true,true,"test1","test1");
+        nonEmptyArray[1] = new User("test1@test1.com","test1","test2",true,false,true,true,"test2","test2");
+        nonEmptyArray[2] = new User("test2@test2.com","test2","test3",true,true,false,true,"test3","test3");
+        nonEmptyArray[3] = new User("test3@test3.com","test1","test2",true,true,true,false,"test4","test4");
+        String firstName = "test1";
+        String surname  = "test2";
+        boolean exceptionBoolean = false;
+
+        // Act
+        User [] result = new User[0];
+        try {
+            result = userService.findUser(nonEmptyArray,firstName, surname);
+        } catch (UserNotFoundException e) {
+            exceptionBoolean = true;
+            System.out.println(e.toString());
+        }
+
+        // Assert
+        Assertions.assertFalse(exceptionBoolean);
+        Assertions.assertEquals(nonEmptyArray[1], result[0]);
+        Assertions.assertEquals(nonEmptyArray[3], result[1]);
+    }
 }
