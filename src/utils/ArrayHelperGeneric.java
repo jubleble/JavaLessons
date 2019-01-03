@@ -1,76 +1,33 @@
 package utils;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.lang.reflect.Array;
 import java.util.Arrays;
+
 /**
- * Created by pawelk on 06/11/2018.
- get min value from array (public T getMinValue(T[] array))
- get max value from array (public T getMaxValue(T[] array))
- IMPLEMENTED find item from array (public bool findItem(T[] array, T item))
- IMPLEMENTED add item to array (public T[] addItem(T[] array, T item))
- IMPLEMENTED remove item from array (public T[] removeItem(T[] array, T item))
- IMPLEMENTED swap items in array. (public T[] swapItems(T[] array, T firstItem, T secondItem))
- 
+ * Created by pawelk on 20/11/2018.
+ *  *get min value from array (public T getMinValue(T[] array))
+     get max value from array (public T getMaxValue(T[] array))
+     find item from array (public bool findItem(T[] array, T item))
+     add item to array (public T[] addItem(T[] array, T item))
+     remove item from array (public T[] removeItem(T[] array, T item))
+     swap items in array. (public T[] swapItems(T[] array, T firstItem, T secondItem))
  */
 public class ArrayHelperGeneric<T> {
-    public ArrayHelperGeneric(){}
-    public boolean findItem(T[] array, T item) {
-        for (T element:array) {
-            if (element==item){
-                return true;
-            }
-        }
-        return false;
+    public ArrayHelperGeneric(){
     }
+    // https://stackoverflow.com/questions/529085/how-to-create-a-generic-array-in-java
+    public T[] addItem(T[] oldArray, T newItem) {
+        T[] newArray = Arrays.copyOf(oldArray, oldArray.length + 1);
 
-    public T[] removeItem(T[] oldArray, T removeItem) {
+        for (int i = 0; i < oldArray.length; i++) {
+            // huge fuck up!!!
+            newArray[i] = oldArray[i];
+        }
 
-        if (oldArray.length == 0) {
-            return null;
-        }
-        int i = 0;
-        for (T element:oldArray){
-            if(element!=removeItem){
-                i++;
-            }
-        }
-        if(i==oldArray.length){
-            return oldArray;
-        }
-        T[] newArray = Arrays.copyOf(oldArray,oldArray.length - 1);
-        int j =0;
-        for (T element:oldArray) {
-            if (element!=removeItem) {
-                newArray[j] =element;
-                j++;
-            }
-        }
-        return newArray;
-    }
+        newArray[newArray.length - 1] = newItem;
 
-    public T[] swapItem(T[] oldArray, T swapItem, T newItem) {
-
-        if (oldArray.length == 0) {
-            return null;
-        }
-        int i = 0;
-        for (T element:oldArray){
-            if(element!=swapItem){
-                i++;
-            }
-        }
-        if(i==oldArray.length){
-            return oldArray;
-        }
-        T[] newArray = Arrays.copyOf(oldArray,oldArray.length);
-
-        for (int j = 0; j <oldArray.length ; j++) {
-            if (oldArray[j]==swapItem) {
-                newArray[j] =newItem;
-            }
-            else {
-                newArray[j] = oldArray[j];
-            }
-        }
         return newArray;
     }
 }

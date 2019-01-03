@@ -23,6 +23,10 @@ public class Promotion {
         return "Promotion Name: " + this.promotionName
                 + "\nPromotion Content: " + this.promotionContent
                 + "\nStart date: " + this.startDate.toString()
-                + "\nNumber of affected users: " + this.affectedUsers.length;
+                + "\nNumber of affected users: " + this.getAffectedUsers().length;
+    }
+
+    public User[] getAffectedUsers() {
+        return affectedUsers;
     }
 }

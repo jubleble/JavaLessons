@@ -1,166 +1,55 @@
 package tests;
 
 import models.User;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import utils.ArrayHelper;
 import utils.ArrayHelperGeneric;
 
+/**
+ * Created by pawelk on 20/11/2018.
+ */
 public class ArrayHelperGenericTest {
+    /*
+        1. array is empty => new array should contains one element, equal to provide item
+        2. array is not empty => new array should contains one additional element, last element in array should be equal to provided item
+    */
     @Test
-    public void findItem_WhenArrayIsEmpty_ThenReturnFalse() {
-        // Arrange
-        ArrayHelperGeneric<User> userArrayHelperGeneric = new ArrayHelperGeneric<User>();
-        User[] array = new User[0];
-        User itemToFind = new User("test2@test2.com", "Test2", "Test2", false, false, false, false);
-        boolean expectedValue = false;
-
-        // Act
-        boolean result = userArrayHelperGeneric.findItem(array, itemToFind);
-
-        // Assert
-        Assertions.assertEquals(expectedValue, result);
-    }
-
-    @Test
-    public void findItem_WhenArrayIsNotEmptyAndElementDoesntExistInArray_ThenReturnFalse() {
+    public void addItem_WhenArrayIsEmpty_ThenShouldReturnArrayWithSingleElement() {
         // Arrange
         ArrayHelperGeneric<String> stringArrayHelperGeneric = new ArrayHelperGeneric<String>();
-        String[] array = new String[3];
-        String itemToFind = "a";
-        array[0] = "aa";
-        array[1] = "aaa";
-        array[2] = "aab";
-        boolean expectedValue = false;
+        String[] strings = new String[0];
+        String newString = "Test";
+
+        ArrayHelperGeneric<User> userArrayHelperGeneric = new ArrayHelperGeneric<User>();
+        User[] users = new User[0];
+        User newUser = new User("test@test.com", "Test", "Test", true, true, true, true, "TestPhone", "TestAddress");
 
         // Act
-        boolean result = stringArrayHelperGeneric.findItem(array, itemToFind);
+        String[] stringsResult = stringArrayHelperGeneric.addItem(strings, newString);
+        User[] usersResult = userArrayHelperGeneric.addItem(users, newUser);
 
         // Assert
-        Assertions.assertEquals(expectedValue, result);
+        Assertions.assertEquals(stringsResult.length, 1);
+        Assertions.assertEquals(stringsResult[0], newString);
+        Assertions.assertEquals(usersResult.length, 1);
+        Assertions.assertEquals(usersResult[0], newUser);
     }
 
     @Test
-    public void findItem_WhenArrayIsNotEmptyAndElementExistsInArray_ThenReturnTrue() {
-        // Arrange
-        ArrayHelperGeneric<String> stringArrayHelperGeneric = new ArrayHelperGeneric<String>();
-        String[] array = new String[3];
-        String itemToFind = "a";
-        array[0] = "aa";
-        array[1] = "a";
-        array[2] = "aab";
-        boolean expectedValue = true;
-
-        // Act
-        boolean result = stringArrayHelperGeneric.findItem(array, itemToFind);
-
-        // Assert
-        Assertions.assertEquals(expectedValue, result);
-    }
-
-    @Test
-    public void removeItem_WhenArrayIsEmpty_ThenShouldReturnEmptyArray() {
+    public void addItem_WhenArrayIsNotEmpty_ThenShouldContainAdditionalProvidedElement() {
         // Arrange
         ArrayHelperGeneric<User> userArrayHelperGeneric = new ArrayHelperGeneric<User>();
-        User[] emptyArray = new User[0];
-        User removeElement = new User("test2@test2.com", "Test2", "Test2", false, false, false, false);
-        User [] expectedValue = emptyArray;
+        User[] oldArray = new User[1];
+        oldArray[0] = new User("test1@test1.com", "Test1", "Test1", false, false, false, false);
+        User newUser = new User("test2@test2.com", "Test2", "Test2", false, false, false, false);
 
         // Act
-        User[] result = userArrayHelperGeneric.removeItem(emptyArray, removeElement);
+        User[] resultUsers = userArrayHelperGeneric.addItem(oldArray, newUser);
 
         // Assert
-        Assertions.assertEquals(expectedValue, result);
-    }
-
-    @Test
-    public void removeItem_WhenArrayIsNotEmptyAndRemoveElementNotExist_ThenShouldReturnOldArray() {
-        // Arrange
-        ArrayHelperGeneric<User> userArrayHelperGeneric = new ArrayHelperGeneric<User>();
-        User[] nonEmptyArray = new User[3];
-        nonEmptyArray[0] = new User("test@test.com", "Test", "Test", false, false, false, false);
-        nonEmptyArray[1] = new User("test1@test1.com", "Test1", "Test1", false, false, false, false);
-        nonEmptyArray[2] = new User("test2@test2.com", "Test2", "Test2", false, false, false, false);
-        User removeElement = new User("test3@test3.com", "Test3", "Test3", false, false, false, false);
-
-        // Act
-        User[] result = userArrayHelperGeneric.removeItem(nonEmptyArray, removeElement);
-
-        // Assert
-        Assertions.assertEquals(nonEmptyArray, result);
-    }
-
-    @Test
-    public void removeItem_WhenArrayIsNotEmptyAndRemoveElementExist_ThenShouldRemoveItemAndReturnNewArray() {
-        // Arrange
-        ArrayHelperGeneric<User> userArrayHelperGeneric = new ArrayHelperGeneric<User>();
-        User[] nonEmptyArray = new User[3];
-        nonEmptyArray[0] = new User("test@test.com", "Test", "Test", false, false, false, false);
-        nonEmptyArray[1] = new User("test1@test1.com", "Test1", "Test1", false, false, false, false);
-        nonEmptyArray[2] = new User("test2@test2.com", "Test2", "Test2", false, false, false, false);
-        User removeElement = nonEmptyArray[1];
-
-        // Act
-        User[] result = userArrayHelperGeneric.removeItem(nonEmptyArray, removeElement);
-
-        // Assert
-        Assertions.assertEquals(nonEmptyArray.length - 1, result.length);
-        Assertions.assertEquals(nonEmptyArray[0], result[0]);
-        Assertions.assertEquals(nonEmptyArray[2], result[1]);
-        Assertions.assertEquals(removeElement, nonEmptyArray[1]);
-    }
-
-    @Test
-    public void swapItem_WhenArrayIsEmpty_ThenShouldReturnNull() {
-        // Arrange
-        ArrayHelperGeneric<User> userArrayHelperGeneric = new ArrayHelperGeneric<User>();
-        User[] emptyArray = new User[0];
-        User[] expectedValue = null;
-        User swapElement = new User("test1@test1.com", "Test1", "Test1", false, false, false, false);
-        User newElement = new User("test3@test3.com", "Test3", "Test3", false, false, false, false);
-
-        // Act
-        User[] result = userArrayHelperGeneric.swapItem(emptyArray, swapElement, newElement);
-
-        // Assert
-        Assertions.assertEquals(expectedValue, result);
-    }
-
-    @Test
-    public void swapItem_WhenArrayIsNotEmptyAndSwapElementNotExist_ThenShouldReturnOldArray() {
-        // Arrange
-        ArrayHelperGeneric<User> userArrayHelperGeneric = new ArrayHelperGeneric<User>();
-        User[] nonEmptyArray = new User[3];
-        nonEmptyArray[0] = new User("test@test.com", "Test", "Test", false, false, false, false);
-        nonEmptyArray[1] = new User("test1@test1.com", "Test1", "Test1", false, false, false, false);
-        nonEmptyArray[2] = new User("test2@test2.com", "Test2", "Test2", false, false, false, false);
-        User swapElement = new User("test4@test4.com", "Test4", "Test4", false, false, false, false);
-        User newElement = new User("test3@test3.com", "Test3", "Test3", false, false, false, false);
-
-        // Act
-        User[] result = userArrayHelperGeneric.swapItem(nonEmptyArray, swapElement, newElement);
-
-        // Assert
-        Assertions.assertEquals(nonEmptyArray, result);
-    }
-
-    @Test
-    public void swapItem_WhenArrayIsNotEmptyAndSwapElementExist_ThenShouldSwapElementAndReturnNewArray() {
-        // Arrange
-        ArrayHelperGeneric<User> userArrayHelperGeneric = new ArrayHelperGeneric<User>();
-        User[] nonEmptyArray = new User[3];
-        nonEmptyArray[0] = new User("test@test.com", "Test", "Test", false, false, false, false);
-        nonEmptyArray[1] = new User("test1@test1.com", "Test1", "Test1", false, false, false, false);
-        nonEmptyArray[2] = new User("test2@test2.com", "Test2", "Test2", false, false, false, false);
-        User swapElement = nonEmptyArray[1];
-        User newElement = new User("test3@test3.com", "Test3", "Test3", false, false, false, false);
-
-        // Act
-        User[] result = userArrayHelperGeneric.swapItem(nonEmptyArray, swapElement, newElement);
-        // Assert
-        Assertions.assertEquals(nonEmptyArray.length, result.length);
-        Assertions.assertEquals(nonEmptyArray[0], result[0]);
-        Assertions.assertEquals(result[1], newElement);
-        Assertions.assertEquals(swapElement, nonEmptyArray[1]);
-        Assertions.assertEquals(nonEmptyArray[2], result[2]);
+        Assertions.assertEquals(resultUsers.length, oldArray.length + 1);
+        Assertions.assertEquals(resultUsers[0], oldArray[0]);
+        Assertions.assertEquals(resultUsers[1], newUser);
     }
 }

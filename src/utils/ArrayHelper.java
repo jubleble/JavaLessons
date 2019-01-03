@@ -1,25 +1,22 @@
 package utils;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * Created by pawelk on 06/11/2018.
- * get min value from array (public T getMinValue(T[] array))
- get max value from array (public T getMaxValue(T[] array))
- find item from array (public bool findItem(T[] array, T item))
- add item to array (public T[] addItem(T[] array, T item))
- remove item from array (public T[] removeItem(T[] array, T item))
- swap items in array. (public T[] swapItems(T[] array, T firstItem, T secondItem))
- todo
+ *  IMPLEMENTED get min value from array (public T getMinValue(T[] array))
+    IMPLEMENTED get max value from array (public T getMaxValue(T[] array))
+    IMPLEMENTED find item from array (public bool findItem(T[] array, T item))
+    IMPLEMENTED add item to array (public T[] addItem(T[] array, T item))
+    IMPLEMENTED remove item from array (public T[] removeItem(T[] array, T item))
+    IMPLEMENTED swap items in array. (public T[] swapItems(T[] array, T firstItem, T secondItem))
  */
 public class ArrayHelper {
-    // [3,2,1] 5 => [3,2,1,5]
     public Integer[] addItem(Integer[] oldArray, Integer newItem) {
         Integer[] newArray = new Integer[oldArray.length + 1];
 
         for (int i = 0; i < oldArray.length; i++) {
             newArray[i] = oldArray[i];
         }
+
         newArray[newArray.length-1] = newItem;
 
         return newArray;
@@ -40,22 +37,7 @@ public class ArrayHelper {
         return min;
     }
 
-    public Integer getMaxValue(int[] array) {
-        int max = Integer.MIN_VALUE;
-
-        if (array.length == 0) {
-            return null;
-        }
-
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] > max) {
-                max = array[i];
-            }
-        }
-        return max;
-    }
-
-    public boolean findItem(int[] array, int item) {
+    public boolean findItem(Integer[] array, int item) {
         for (int element:array) {
             if (element==item){
                 return true;
@@ -64,55 +46,56 @@ public class ArrayHelper {
         return false;
     }
 
-    public Integer[] removeItem(Integer[] oldArray, Integer removeItem) {
-
-        if (oldArray.length == 0) {
+    public Integer getMaxValue(int[] array){
+        if(array.length == 0)
             return null;
+        int result = Integer.MIN_VALUE;
+        for (int param: array) {
+            if(param>result)
+                result = param;
         }
-        int i = 0;
-        for (int element:oldArray){
-            if(element!=removeItem){
-                i++;
+        return result;
+    }
+
+    public Integer[] removeItem(Integer[] array, Integer item){
+        if(array.length == 0)
+            return null;
+        int length = 0;
+        for (Integer param: array) {
+            if(!param.equals(item)){
+                length++;
             }
         }
-        if(i==oldArray.length){
-            return oldArray;
-        }
-        Integer[] newArray = new Integer[oldArray.length - 1];
-        int j =0;
-        for (int element:oldArray) {
-            if (element!=removeItem) {
-                newArray[j] = element;
+        Integer[] resultArray = new Integer[length];
+        int j = 0;
+        for (Integer param: array) {
+            if(!param.equals(item)){
+                resultArray[j] = param;
                 j++;
             }
         }
-        return newArray;
+        return resultArray;
     }
 
-    public Integer[] swapItem(Integer[] oldArray, Integer swapItem, Integer newItem) {
-
-        if (oldArray.length == 0) {
+    public Integer[] swapItems(Integer[] array, int firstItem, int secondItem){
+        if(array.length == 0)
             return null;
-        }
-        int i = 0;
-        for (int element:oldArray){
-            if(element!=swapItem){
-                i++;
-            }
-        }
-        if(i==oldArray.length){
-            return oldArray;
-        }
-        Integer[] newArray = new Integer[oldArray.length];
+        if(!findItem(array,firstItem)||!findItem(array,secondItem))
+            return array; //or NULL??
 
-        for (int j = 0; j <oldArray.length ; j++) {
-            if (oldArray[j]==swapItem) {
-                newArray[j] = newItem;
-            }
-            else {
-                newArray[j] = oldArray[j];
-            }
+        int firstItemPosition = 0;
+        int secondItemPosition = 0;
+        for (int i = 0; i < array.length; i++){
+            if(array[i].equals(firstItem))
+                firstItemPosition = i;
+            if(array[i].equals(secondItem))
+                secondItemPosition = i;
         }
-        return newArray;
+        Integer temp;
+        temp = array[firstItemPosition];
+        array[firstItemPosition] = array[secondItemPosition];
+        array[secondItemPosition] = temp;
+        return array;
     }
+
 }

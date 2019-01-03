@@ -139,4 +139,26 @@ public class User {
                 "\nLastName: " + this.lastName +
                 "\nEmail: " + this.email;
     }
+
+    @Override
+    public boolean equals(Object item){
+        if (!(item instanceof User))
+            return false;
+
+        User that = (User) item;
+
+        return this.email.equals(that.email) && this.firstName.equals(that.firstName) && this.lastName.equals(that.lastName);
+    }
+
+    @Override
+    public int hashCode(){
+        int hashCode = 1;
+
+        hashCode = hashCode * 37 + this.email.hashCode();
+        hashCode = hashCode * 37 + this.firstName.hashCode();
+        hashCode = hashCode * 37 + this.lastName.hashCode();
+
+        return hashCode;
+    }
+
 }

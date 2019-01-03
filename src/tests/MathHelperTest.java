@@ -46,4 +46,17 @@ public class MathHelperTest {
         // Assert
         Assertions.assertEquals(false, result);
     }
+
+    @Test
+    public void IsPrimeNumber_WhenProvidedNumberIsZero_ThenReturnFalse() {
+        // Arrange
+        int providedNumber = 0;
+        MathHelper mathHelper = new MathHelper();
+
+        // Act
+        boolean result = mathHelper.isPrimeNumber(providedNumber);
+
+        // Assert
+        Assertions.assertEquals(false, result);
+    }
 }
