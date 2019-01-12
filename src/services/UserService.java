@@ -108,14 +108,19 @@ public class UserService {
     =>
         u1.loyaltyPoints = 0;
         u2.loyaltyPoints = 0;
-        u3.loyaltyPoints = 0;
+        u3.loyaltyPoints = 0;*/
 
     public void clearLoyaltyPoints(User[] users) {
-        throw new NotImplementedException();
+        if (users.length == 0) {
+            System.out.println("Not found Users");
+        }
+        for (User u : users) {
+            u.setLoyaltyPoints(0);
+        }
     }
 
 
-    write unit tests
+    /*write unit tests
     method should update user phone number
     WrongPhoneNumberException - should be thrown in case WHEN:
         - newPhoneNumber is exactly the same like old one

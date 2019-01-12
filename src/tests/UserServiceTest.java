@@ -152,4 +152,17 @@ class UserServiceTest {
         // Assert
         Assertions.assertEquals(expectedValue, result);
     }
+
+    @Test
+    void clearLoyaltyPoints_WhenArrayIsEmpty_ThenNotFoundUsers() {
+        // Arrange
+        UserService userService = new UserService();
+        User[] EmptyArray = new User[0];
+        String expectedValue = "Not found Users";
+        // Act
+        userService.clearLoyaltyPoints(EmptyArray);
+
+        // Assert
+        Assertions.assertEquals(expectedValue, "Not found Users");
+    }
 }
