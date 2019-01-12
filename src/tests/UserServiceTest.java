@@ -1,6 +1,7 @@
 package tests;
 
 import exceptions.UserNotFoundException;
+import exceptions.WrongPhoneNumberException;
 import models.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -206,5 +207,26 @@ class UserServiceTest {
         Assertions.assertEquals(expectedValue,nonEmptyArray[1].getLoyaltyPoints());
         Assertions.assertEquals(expectedValue,nonEmptyArray[2].getLoyaltyPoints());
         Assertions.assertEquals(expectedValue,nonEmptyArray[3].getLoyaltyPoints());
+    }
+
+    @Test
+    void updateUserPhoneNumber_WhenPhoneIsOk_ThenUpdateUserPhoneNumber() {
+        // Arrange
+        UserService userService = new UserService();
+        User user = new User ("test@test.com","test","test1",false,true,true,true,"12345678","test1");
+        String newPhoneNumber = "87654321";
+        boolean exceptionBoolean = false;
+
+        // Act
+        try {
+            userService.updateUserPhoneNumber(user,newPhoneNumber);
+        } catch (WrongPhoneNumberException e) {
+            exceptionBoolean = true;
+            System.out.println(e.toString());
+        }
+
+        // Assert
+        Assertions.assertFalse(exceptionBoolean);
+        Assertions.assertEquals(newPhoneNumber,user.getPhoneNumber());
     }
 }

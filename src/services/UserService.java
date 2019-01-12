@@ -2,6 +2,7 @@ package services;
 
 import exceptions.UserCannotReceiveMessageException;
 import exceptions.UserNotFoundException;
+import exceptions.WrongPhoneNumberException;
 import models.User;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import utils.*;
@@ -119,18 +120,26 @@ public class UserService {
         }
     }
 
-
     /*write unit tests
     method should update user phone number
     WrongPhoneNumberException - should be thrown in case WHEN:
         - newPhoneNumber is exactly the same like old one
-        - newPhoneNumber has less characters than 8 or more than 12
+        - newPhoneNumber has less characters than 8 or more than 12*/
 
-    public void updateUserPhoneNumber(User user, String newPhoneNumber) throws WrongPhoneNumberException {
-
+    public void updateUserPhoneNumber(User users, String newPhoneNumber) throws WrongPhoneNumberException {
+        if (users.getPhoneNumber().equals(newPhoneNumber)){
+            throw new WrongPhoneNumberException("Same phone number as old : "+ newPhoneNumber);
+        }
+        if (newPhoneNumber.length()>12){
+            throw new WrongPhoneNumberException("Phone number has more characters than 12: "+ newPhoneNumber);
+        }
+        if (newPhoneNumber.length()<8){
+            throw new WrongPhoneNumberException("Phone number has less characters than 8: "+ newPhoneNumber);
+        }
+        users.setPhoneNumber(newPhoneNumber);
     }
 
-    write unit tests
+    /*write unit tests
     method should update user address
         WrongAddressException - should be thrown in case WHEN:
         - newAddress is exactly the same like old one
