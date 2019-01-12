@@ -165,4 +165,25 @@ class UserServiceTest {
         // Assert
         Assertions.assertEquals(expectedValue, "Not found Users");
     }
+
+    @Test
+    void clearLoyaltyPoints_WhenArrayIsNotEmptyAndUsersDontHaveLoyaltyPoints_ThenChangeNumberOfLoyaltyPoints() {
+        // Arrange
+        UserService userService = new UserService();
+        User[] nonEmptyArray = new User[4];
+        nonEmptyArray[0] = new User("test@test.com","test","test1",false,false,false,false,"test1","test1");
+        nonEmptyArray[1] = new User("test1@test1.com","test1","test2",false,false,false,false,"test2","test2");
+        nonEmptyArray[2] = new User("test2@test2.com","test2","test3",false,false,false,false,"test3","test3");
+        nonEmptyArray[3] = new User("test3@test3.com","test1","test2",false,false,false,false,"test4","test4");
+        Integer expectedValue = 0;
+
+        // Act
+        userService.clearLoyaltyPoints(nonEmptyArray);
+
+        // Assert
+        Assertions.assertEquals(expectedValue,nonEmptyArray[0].getLoyaltyPoints());
+        Assertions.assertEquals(expectedValue,nonEmptyArray[1].getLoyaltyPoints());
+        Assertions.assertEquals(expectedValue,nonEmptyArray[2].getLoyaltyPoints());
+        Assertions.assertEquals(expectedValue,nonEmptyArray[3].getLoyaltyPoints());
+    }
 }
