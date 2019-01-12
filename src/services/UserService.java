@@ -2,6 +2,7 @@ package services;
 
 import exceptions.UserCannotReceiveMessageException;
 import exceptions.UserNotFoundException;
+import exceptions.WrongAddressException;
 import exceptions.WrongPhoneNumberException;
 import models.User;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -143,10 +144,15 @@ public class UserService {
     method should update user address
         WrongAddressException - should be thrown in case WHEN:
         - newAddress is exactly the same like old one
-        - newAddress is empty = ""
+        - newAddress is empty = ""*/
 
-    public void updateUserAddress(User user, String newAddress) throws WrongAddressException {
-
+    public void updateUserAddress(User users, String newAddress) throws WrongAddressException {
+        if (users.getAddress().equals(newAddress)){
+            throw new WrongAddressException("New address is the same as old : "+ newAddress);
+        }
+        if (newAddress.equals("")){
+            throw new WrongAddressException("New address is empty: "+ newAddress);
+        }
+        users.setAddress(newAddress);
     }
-    */
 }

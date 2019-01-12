@@ -1,6 +1,7 @@
 package tests;
 
 import exceptions.UserNotFoundException;
+import exceptions.WrongAddressException;
 import exceptions.WrongPhoneNumberException;
 import models.User;
 import org.junit.jupiter.api.Assertions;
@@ -292,4 +293,26 @@ class UserServiceTest {
         Assertions.assertTrue(exceptionBoolean);
         Assertions.assertEquals(newPhoneNumber,user.getPhoneNumber());
     }
+
+    @Test
+    void updateUserAddress_WhenAddressIsEmpty_ThenWrongAddressException() {
+        // Arrange
+        UserService userService = new UserService();
+        User user = new User ("test@test.com","test","test1",false,true,true,true,"12345678","test1");
+        String newAddress = "";
+        boolean exceptionBoolean = false;
+
+        // Act
+        try {
+            userService.updateUserAddress(user,newAddress);
+        } catch (WrongAddressException e) {
+            exceptionBoolean = true;
+            System.out.println(e.toString());
+        }
+
+        // Assert
+        Assertions.assertTrue(exceptionBoolean);
+        Assertions.assertNotEquals(newAddress,user.getAddress());
+    }
+
 }
