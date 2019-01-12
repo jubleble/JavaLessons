@@ -229,4 +229,25 @@ class UserServiceTest {
         Assertions.assertFalse(exceptionBoolean);
         Assertions.assertEquals(newPhoneNumber,user.getPhoneNumber());
     }
+
+    @Test
+    void updateUserPhoneNumber_WhenPhoneIsTooShort_ThenWrongPhoneNumberException() {
+        // Arrange
+        UserService userService = new UserService();
+        User user = new User ("test@test.com","test","test1",false,true,true,true,"12345678","test1");
+        String newPhoneNumber = "1234567";
+        boolean exceptionBoolean = false;
+
+        // Act
+        try {
+            userService.updateUserPhoneNumber(user,newPhoneNumber);
+        } catch (WrongPhoneNumberException e) {
+            exceptionBoolean = true;
+            System.out.println(e.toString());
+        }
+
+        // Assert
+        Assertions.assertTrue(exceptionBoolean);
+        Assertions.assertNotEquals(newPhoneNumber,user.getPhoneNumber());
+    }
 }
