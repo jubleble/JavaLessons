@@ -135,4 +135,21 @@ class UserServiceTest {
         // Assert
         Assertions.assertNull(result);
     }
+
+    @Test
+    void calculateLoyaltyPointsOfUsers_WhenArrayIsNotEmpty_ThenShouldReturnNumberOfLoyaltyPoints() {
+        // Arrange
+        UserService userService = new UserService();
+        User[] nonEmptyArray = new User[4];
+        nonEmptyArray[0] = new User("test@test.com","test","test1",false,true,true,true,"test1","test1");
+        nonEmptyArray[1] = new User("test1@test1.com","test1","test2",true,false,true,true,"test2","test2");
+        nonEmptyArray[2] = new User("test2@test2.com","test2","test3",true,true,false,true,"test3","test3");
+        nonEmptyArray[3] = new User("test3@test3.com","test1","test2",true,true,true,false,"test4","test4");
+        Integer expectedValue = 480;
+        // Act
+        Integer result = userService.calculateLoyaltyPointsOfUsers(nonEmptyArray);
+
+        // Assert
+        Assertions.assertEquals(expectedValue, result);
+    }
 }
