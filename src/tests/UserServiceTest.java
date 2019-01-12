@@ -30,7 +30,7 @@ class UserServiceTest {
         // Act
         User [] result = new User[0];
         try {
-            result = userService.findUser(EmptyArray,firstName, surname);
+            result = userService.getUser(EmptyArray,firstName, surname);
         } catch (UserNotFoundException e) {
             e.printStackTrace();
         }
@@ -55,7 +55,7 @@ class UserServiceTest {
         // Act
         User [] result = new User[0];
         try {
-            result = userService.findUser(nonEmptyArray,firstName, surname);
+            result = userService.getUser(nonEmptyArray,firstName, surname);
         } catch (UserNotFoundException e) {
             exceptionBoolean = true;
             System.out.println(e.toString());
@@ -82,7 +82,7 @@ class UserServiceTest {
         // Act
         User [] result = new User[0];
         try {
-            result = userService.findUser(nonEmptyArray,firstName, surname);
+            result = userService.getUser(nonEmptyArray,firstName, surname);
         } catch (UserNotFoundException e) {
             exceptionBoolean = true;
             System.out.println(e.toString());
@@ -110,7 +110,7 @@ class UserServiceTest {
         // Act
         User [] result = new User[0];
         try {
-            result = userService.findUser(nonEmptyArray,firstName, surname);
+            result = userService.getUser(nonEmptyArray,firstName, surname);
         } catch (UserNotFoundException e) {
             exceptionBoolean = true;
             System.out.println(e.toString());
@@ -120,5 +120,19 @@ class UserServiceTest {
         Assertions.assertFalse(exceptionBoolean);
         Assertions.assertEquals(nonEmptyArray[1], result[0]);
         Assertions.assertEquals(nonEmptyArray[3], result[1]);
+    }
+
+    @Test
+    void calculateLoyaltyPointsOfUsers_WhenArrayIsEmpty_ThenShouldReturnNull() {
+        // Arrange
+        UserService userService = new UserService();
+        User[] EmptyArray = new User[0];
+        // expectedValue = null;
+
+        // Act
+        Integer result = userService.calculateLoyaltyPointsOfUsers(EmptyArray);
+
+        // Assert
+        Assertions.assertNull(result);
     }
 }

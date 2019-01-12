@@ -43,11 +43,11 @@ public class UserService {
         return resultUsers;
     }
 
-    public User[] getUsersWhoHaveMoreLoyaltyPointsThan
+    /*public User[] getUsersWhoHaveMoreLoyaltyPointsThan
             (User[] allUsers, int minimumExpectedLoyaltyPoints) {
         NotImplementedException exception = new NotImplementedException();
         throw exception;
-    }
+    }*/
 
   /*
     write unit tests
@@ -56,7 +56,7 @@ public class UserService {
     WHEN provided user doesn't exist in array 'users' THEN throw exception UserNotFoundException
     */
   public UserService(){}
-    public User[] findUser(User[] users, String firstName, String lastName) throws UserNotFoundException {
+    public User[] getUser(User[] users, String firstName, String lastName) throws UserNotFoundException {
         int i = 0;
         if (users.length== 0) {
             return users;
@@ -69,35 +69,37 @@ public class UserService {
         if (i==0){
             throw new UserNotFoundException("Not found User:"+firstName+" "+lastName);
         }
-        User [] findUser = new User[i];
+        User [] getUser = new User[i];
         int j = 0;
         for (User u:users) {
             if (u.getFirstName().equals(firstName) && u.getLastName().equals(lastName)) {
-                findUser[j] = u;
+                getUser[j] = u;
                 j++;
             }
         }
-        return findUser;
+        return getUser;
     }
 
-    /*public User getUser(User[] users, String firstName, String lastName) throws UserNotFoundException{
-        NotImplementedException exception = new NotImplementedException();
-        throw exception;
-    }
-
-    write unit tests
+    /*write unit tests
     method should calculate number of loyalty points of users
     [u1,u2,u3]
         u1.loyaltyPoints = 30;
         u2.loyaltyPoints = 20;
         u3.loyaltyPoints = 50;
-    => 30 + 20 + 50 = 100;
+    => 30 + 20 + 50 = 100;*/
 
-    public int calculateLoyaltyPointsOfUsers(User[] users) {
-        throw new NotImplementedException();
+    public Integer calculateLoyaltyPointsOfUsers(User[] users){
+        int totalLoyaltyPoints=0;
+        if (users.length==0){
+            return null;
+        }
+        for (User u:users) {
+            totalLoyaltyPoints+=u.getLoyaltyPoints();
+        }
+        return totalLoyaltyPoints;
     }
 
-    write unit tests
+    /*write unit tests
     method should set up '0' as a new value for loyaltyPoints of provided users
     [u1,u2,u3]
         u1.loyaltyPoints = 30;
